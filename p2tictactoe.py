@@ -1,9 +1,9 @@
 import random
 
-gameBoard = [1,1,1,0,
-             2,3,3,3,
-             2,4,5,5,
-             2,4,6,7]
+gameBoard = [0,0,10,10,
+             0,0,0,0,
+             0,0,0,0,
+             0,0,0,0]
 
 winSpaceIndex = [[0,1,2,3],
              [4,5,6,7],
@@ -22,22 +22,24 @@ END_SUM = 34
 inEndState = False
 
 
-def calculateSpaceValues():
+def calculateSpaceValues(): 
+    winSpaceValues[:]=[]  
     currentSpaceGroup = []
     for element in winSpaceIndex:
         for index in element:
             currentSpaceGroup.append(gameBoard[index])
         winSpaceValues.append(currentSpaceGroup)
         currentSpaceGroup = []
-  
+    #print(winSpaceValues)
 
 calculateSpaceValues()
 
 
 def calculateSums():
+    currentSums[:] = []
     for index in range(len(winSpaceValues)):
         currentSums.append(sum(winSpaceValues[index]))
-    print(currentSums)
+    #print(currentSums)
 
 
 calculateSums()
@@ -55,8 +57,45 @@ def determineEndState(inEndState):
 
 determineEndState(inEndState)
 
-def insertValue(value, index):
-    gameBoard[index] = value
 
 def reevaluateBoard():
+    #print(winSpaceValues)
+    calculateSpaceValues()
+    calculateSums()
+
+
+def insertValue(value, index, board):
+    board[index] = value
+    reevaluateBoard()
+
+def resetBoard(board, state):
+    for index in board:
+        board[index] = 0
+    reevaluateBoard
+    state = False
+
+
+value = index = None
+#Input validation for income
+while value is None or index is None:
     
+    try:
+        #Convert user input into integer and check if in range
+        value, index = [int(x) for x in input("Enter a value(first) and index(0-15)(second): \n\n").split()]
+        if value <= 0:
+            print("\nError! value must be greater than 0.")
+            value = None
+        elif index < 0 or index > 15:
+            print("\nError! index must be between 0 and 15(0-15).")
+            index = None
+        else:
+            insertValue(value,index, gameBoard)
+
+    except ValueError:
+        #Error message for non-integer input
+        print("\nError! Please only enter an integer for value and index.")
+
+determineEndState(inEndState)
+
+resetBoard(gameBoard, inEndState)
+determineEndState(inEndState)
