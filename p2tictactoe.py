@@ -1,9 +1,9 @@
 import random
 
-gameBoard = [0,0,0,0,
-             0,0,0,0,
-             0,0,0,0
-             0,0,0,0]
+gameBoard = [1,1,1,1,
+             2,3,3,3,
+             2,4,5,5,
+             2,4,6,7]
 
 winSpaces = [[0,1,2,3],
              [4,5,6,7],
@@ -26,7 +26,9 @@ def calculateSum():
         for index in element:
             currentSpace.append(gameBoard[index])
         print(currentSpace)
-        currentSums[currentSumsIndex]sum(currentSpace)
+        currentSums[currentSumsIndex] = sum(currentSpace)
+        print(currentSums)
+        currentSumsIndex += 1
 
-
+calculateSum()
 #def checkTerminalState()
