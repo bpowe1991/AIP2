@@ -1,4 +1,4 @@
-from .p2tictactoe import Board
+from .Board import Board
 
 class Player:
     def __init__(self, maxStatus):
