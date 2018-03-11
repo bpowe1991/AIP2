@@ -34,7 +34,7 @@ class Board:
     def __setWinSpaceValues(self):
         self.__winSpaceValues[:]=[]  
         currentSpaceGroup = []
-        for element in winSpaceIndex:
+        for element in self.__winSpaceIndex:
             for index in element:
                 currentSpaceGroup.append(self.__gameBoard[index])
             self.__winSpaceValues.append(currentSpaceGroup)
@@ -158,3 +158,4 @@ while value is None or index is None:
 
 # resetBoard(gameBoard, inEndState)
 # determineEndState(inEndState)
+board.getInfo()
