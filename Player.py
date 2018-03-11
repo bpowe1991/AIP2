@@ -59,23 +59,11 @@ class Player:
                 print("\nError! Please only enter an integer for value and index.")
 
 board = Board.Board()
-board.printBoard()
 maxS = True
 player1 = Player(maxS)
 maxS2 = False
 player2 = Player(maxS2)
 
-# print("Turn - Player 1")
-# print("Available Values: ", player1.getAvailibleValues())
-# player1.setAvailableSpaces(board)
-# print("Available Spaces: ", player1.getAvailableSpaces())
-# player1.makeMove(board)
-# board.printBoard()
-# print("Turn - Player 1")
-# print("Available Values: ", player1.getAvailibleValues())
-# player1.setAvailableSpaces(board)
-# print("Available Spaces: ", player1.getAvailableSpaces())
-# del player1, player2, board
 
 turn = 0
 previousTurn = 1
