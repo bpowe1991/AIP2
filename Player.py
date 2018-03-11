@@ -65,9 +65,44 @@ player1 = Player(maxS)
 maxS2 = False
 player2 = Player(maxS2)
 
-print("Turn - Player 1")
-print("Available Values: ", player1.getAvailibleValues())
-player1.setAvailableSpaces(board)
-print("Available Spaces: ", player1.getAvailableSpaces())
+# print("Turn - Player 1")
+# print("Available Values: ", player1.getAvailibleValues())
+# player1.setAvailableSpaces(board)
+# print("Available Spaces: ", player1.getAvailableSpaces())
+# player1.makeMove(board)
+# board.printBoard()
+# print("Turn - Player 1")
+# print("Available Values: ", player1.getAvailibleValues())
+# player1.setAvailableSpaces(board)
+# print("Available Spaces: ", player1.getAvailableSpaces())
+# del player1, player2, board
 
+turn = 0
+previousTurn = 1
+while board.isTerminalState() != True:
+    if turn == 0:
+        board.printBoard()
+        print("Turn - Player 1")
+        print("Available Values: ", player1.getAvailibleValues())
+        player1.setAvailableSpaces(board)
+        print("Available Spaces: ", player1.getAvailableSpaces())
+        player1.makeMove(board)
+        turn = 1
+        previousTurn = 0
+    else:
+        board.printBoard()
+        print("Turn - Player 2")
+        print("Available Values: ", player2.getAvailibleValues())
+        player2.setAvailableSpaces(board)
+        print("Available Spaces: ", player2.getAvailableSpaces())
+        player2.makeMove(board)
+        turn = 0
+        previousTurn = 1
+
+board.printBoard()
+print("End of game")
+if previousTurn == 0:
+    print("Player 1 Wins!")
+else:
+    print("Player 2 Wins!")
 del player1, player2, board
