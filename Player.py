@@ -103,9 +103,9 @@ board.printBoard()
 print("End of game")
 if board.printWinningSpace() != []:
     if previousTurn == 0:
-        print("Player 1 Wins!")
+        print("Player 1 Wins!\nWinning Space:", board.printWinningSpace())
     else:
-        print("Player 2 Wins!")
+        print("Player 2 Wins!\nWinning Space:", board.printWinningSpace())
 else:
     print("Tie Game!")
 del player1, player2, board
