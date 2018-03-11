@@ -1,4 +1,5 @@
 import Board
+import os
 
 class Player:
     def __init__(self, maxStatus):
@@ -77,6 +78,7 @@ while board.isTerminalState() != True:
         player1.makeMove(board)
         turn = 1
         previousTurn = 0
+        os.system('cls' if os.name == 'nt' else 'clear')
     else:
         board.printBoard()
         print("Turn - Player 2")
@@ -86,6 +88,7 @@ while board.isTerminalState() != True:
         player2.makeMove(board)
         turn = 0
         previousTurn = 1
+        os.system('cls' if os.name == 'nt' else 'clear')
 
 board.printBoard()
 print("End of game")
@@ -96,4 +99,6 @@ if board.printWinningSpace() != []:
         print("Player 2 Wins!\nWinning Space:", board.printWinningSpace())
 else:
     print("Tie Game!")
+
+print("\n\n\n")
 del player1, player2, board
