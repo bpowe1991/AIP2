@@ -95,3 +95,7 @@ class Board:
             if self.__gameBoard[element] == 0:
                 moves.append(element)
         return moves
+
+    def printWinningSpace(self):
+        index = self.__currentSums.index(self.__endSUM)
+        return self.__winSpaceValues[index]
