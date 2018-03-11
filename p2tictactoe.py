@@ -45,87 +45,93 @@ class Board:
         for index in range(len(self.__winSpaceValues)):
             self.__currentSums.append(sum(self.__winSpaceValues[index]))
 
-    def recalculate(self):
-        self.__setWinSpaceValues
-
+    def __recalculate(self):
+        self.__setWinSpaceValues()
+        self.__setSums()
 
     def setValue(self, value, index):
         self.__gameBoard[index] = value
+        self.__recalculate()
+
+    def getInfo(self):
+        print(self.__currentSums)
+        print(self.__winSpaceValues)
+        print(self.__gameBoard)
+
+board = Board()
+
+# gameBoard = [0,0,10,10,
+#              0,0,0,0,
+#              0,0,0,0,
+#              0,0,0,0]
+
+# winSpaceIndex = [[0,1,2,3],
+#              [4,5,6,7],
+#              [8,9,10,11],
+#              [12,13,14,15],
+#              [0,4,8,12],
+#              [1,5,9,13],
+#              [2,6,10,14],
+#              [3,7,11,15],
+#              [0,5,10,15],
+#              [3,6,9,12]]
+
+# winSpaceValues = []
+# currentSums = []
+# END_SUM = 34
+# inEndState = False
 
 
+# def calculateSpaceValues(): 
+#     winSpaceValues[:]=[]  
+#     currentSpaceGroup = []
+#     for element in winSpaceIndex:
+#         for index in element:
+#             currentSpaceGroup.append(gameBoard[index])
+#         winSpaceValues.append(currentSpaceGroup)
+#         currentSpaceGroup = []
+#     #print(winSpaceValues)
 
-gameBoard = [0,0,10,10,
-             0,0,0,0,
-             0,0,0,0,
-             0,0,0,0]
-
-winSpaceIndex = [[0,1,2,3],
-             [4,5,6,7],
-             [8,9,10,11],
-             [12,13,14,15],
-             [0,4,8,12],
-             [1,5,9,13],
-             [2,6,10,14],
-             [3,7,11,15],
-             [0,5,10,15],
-             [3,6,9,12]]
-
-winSpaceValues = []
-currentSums = []
-END_SUM = 34
-inEndState = False
+# calculateSpaceValues()
 
 
-def calculateSpaceValues(): 
-    winSpaceValues[:]=[]  
-    currentSpaceGroup = []
-    for element in winSpaceIndex:
-        for index in element:
-            currentSpaceGroup.append(gameBoard[index])
-        winSpaceValues.append(currentSpaceGroup)
-        currentSpaceGroup = []
-    #print(winSpaceValues)
-
-calculateSpaceValues()
+# def calculateSums():
+#     currentSums[:] = []
+#     for index in range(len(winSpaceValues)):
+#         currentSums.append(sum(winSpaceValues[index]))
+#     #print(currentSums)
 
 
-def calculateSums():
-    currentSums[:] = []
-    for index in range(len(winSpaceValues)):
-        currentSums.append(sum(winSpaceValues[index]))
-    #print(currentSums)
+# calculateSums()
 
 
-calculateSums()
+# def determineEndState(inEndState):
+#     if not gameBoard.__contains__(0):
+#         inEndState = True
+#     else:
+#         for sumIndex, sumValue in enumerate(currentSums, 0):
+#             if sumValue == END_SUM:
+#                 if not winSpaceValues[sumIndex].__contains__(0):
+#                     inEndState = True
+#     print(inEndState)
+
+# determineEndState(inEndState)
 
 
-def determineEndState(inEndState):
-    if not gameBoard.__contains__(0):
-        inEndState = True
-    else:
-        for sumIndex, sumValue in enumerate(currentSums, 0):
-            if sumValue == END_SUM:
-                if not winSpaceValues[sumIndex].__contains__(0):
-                    inEndState = True
-    print(inEndState)
-
-determineEndState(inEndState)
+# def reevaluateBoard():
+#     #print(winSpaceValues)
+#     calculateSpaceValues()
+#     calculateSums()
 
 
-def reevaluateBoard():
-    #print(winSpaceValues)
-    calculateSpaceValues()
-    calculateSums()
+# def insertValue(value, index, board):
+#     board[index] = value
+#     reevaluateBoard()
 
-
-def insertValue(value, index, board):
-    board[index] = value
-    reevaluateBoard()
-
-def resetBoard(board, state):
-    for index in board:
-        board[index] = 0
-    state = False
+# def resetBoard(board, state):
+#     for index in board:
+#         board[index] = 0
+#     state = False
 
 
 value = index = None
@@ -142,13 +148,13 @@ while value is None or index is None:
             print("\nError! index must be between 0 and 15(0-15).")
             index = None
         else:
-            insertValue(value,index, gameBoard)
+            board.setValue(value, index)
 
     except ValueError:
         #Error message for non-integer input
         print("\nError! Please only enter an integer for value and index.")
 
-determineEndState(inEndState)
+# determineEndState(inEndState)
 
-resetBoard(gameBoard, inEndState)
-determineEndState(inEndState)
+# resetBoard(gameBoard, inEndState)
+# determineEndState(inEndState)
