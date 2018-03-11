@@ -94,7 +94,7 @@ class Board:
         for element in range(len(self.__gameBoard)):
             if self.__gameBoard[element] == 0:
                 moves.append(element)
-        print("Available Spaces(0-15): ", moves)
+        return moves
 
 board = Board()
 board.printBoard()
@@ -124,7 +124,7 @@ while choice == 'Y':
             print("\nError! Please only enter an integer for value and index.")
 
     board.printBoard()
-    board.availableMoves()
+    print(board.availableMoves())
     board.getInfo()
 
     choice = input("Continue (Y/N)?: \n")
