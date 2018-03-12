@@ -12,19 +12,47 @@ def iterativeDeepeningMiniMax(state, players):
         #print(actions)
 
 def minValue(state, depth, flag, players):
-    #if state.isTerminalState or depth == 0:
-       # return utility(state, flag)
-    #v = math.inf
     actions = generateMoves(state, flag, players)
-    for a in actions:
-        p = copy.deepcopy(players)
-        s = copy.deepcopy(state)
-        p[flag].compMakeMove(a[0], a[1], s)
-        print(a,"\n", s.getBoardState(),"\n",p[flag].getAvailibleValues(),"\n", p[flag].getAvailableSpaces())
-
-        flag = 1
-        #v = min(v,m=0)
+    p = copy.deepcopy(players)
+    s = copy.deepcopy(state)
+    if s.isTerminalState():
+        print("True")
+        print(s.printWinningSpace())
         del p,s
+        return
+    for a in actions:
+        print("Actions: ", actions)
+        
+        print("Board: ", state.getBoardState())
+        p[flag].compMakeMove(a[0], a[1], s)
+        p[flag+1].setAvailableSpaces(s)
+        print(a,"\n", s.getBoardState(),"\n",p[flag].getAvailibleValues(),"\n", p[flag].getAvailableSpaces())
+        flag = 1
+        print("Spaces Left: ", p[flag].getAvailableSpaces(),"\n\n")
+        maxValue(s, depth, flag, p)
+        print("Hello")
+
+    return
+
+def maxValue(state, depth, flag, players):
+    actions = generateMoves(state, flag, players)
+    p = copy.deepcopy(players)
+    s = copy.deepcopy(state)
+    if s.isTerminalState():
+        print("True")
+        print(s.printWinningSpace())
+        del p,s
+        return
+    for a in actions:
+        
+        print("Board: ", state.getBoardState())
+        p[flag].compMakeMove(a[0], a[1], s)
+        p[flag-1].setAvailableSpaces(s)
+        print(a,"\n", s.getBoardState(),"\n",p[flag].getAvailibleValues(),"\n", p[flag].getAvailableSpaces())
+        flag = 0
+        print("Spaces Left: ", p[flag].getAvailableSpaces(),"\n\n")
+        minValue(s, depth, flag, p)
+        print("Hello")
     return
 
 def utility(state, flag):

@@ -63,7 +63,7 @@ class Player:
                                 board.setValue(value, index)
                                 self.setState(board)
                                 self.setAvailableSpaces(board)
-                                self.__usedValues.append(self.__availableValues.pop(index))
+                                self.__availableValues.remove(value)
                          except ValueError:
                             print("\nError! Please only enter an integer for value and index.")   
             
@@ -74,13 +74,15 @@ class Player:
         return self.__usedValues
 
     def compMakeMove(self, value, index, board):
-        print("Before: ", self.__availableValues, "\n", self.__availableSpaces)
+        print("Before: ", self.__availableValues, "\n", self.__availableSpaces, "index: ", index, "Length: ", len(self.__availableValues))
         board.setValue(value, index)
         self.setState(board)
         self.setAvailableSpaces(board)
-        self.__usedValues.append(self.__availableValues.pop(index))
-        print("After: ", self.__availableValues, "\n", self.__availableSpaces)
-        
+        self.__usedValues.append(self.__availableValues.pop(self.__availableValues.index(value)))
+        print("After: ", self.__availableValues, "\n", self.__availableSpaces, "index: ", index, "Length: ", len(self.__availableValues))
+
+    def compAddMoveBack(self):
+        return 
 # board = Board.Board()
 # maxS = True
 # player1 = Player(maxS)
