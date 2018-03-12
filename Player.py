@@ -9,6 +9,9 @@ class Player:
         self.__currentState = []
         self.__setAvailableValues()
 
+    def getIsMax(self):
+        return self.__isMax
+
     def setAvailableSpaces(self, board):
         self.__availableSpaces = board.availableMoves()
 
