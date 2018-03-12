@@ -5,35 +5,40 @@ import Player
 import os
 import copy
 
-def iterativeDeepening():
+def iterativeDeepeningMiniMax(state, players):
+    for depth in range(1,17):
+        flag = 1
+        #actions = minValue(state, depth, flag, players)
+        #print(actions)
+
+def minValue(state, depth, flag, players):
+    #if state.isTerminalState or depth == 0:
+       # return utility(state, flag)
+    #v = math.inf
+    actions = generateMoves(state, flag, players)
+    for a in actions:
+        p = copy.deepcopy(players)
+        s = copy.deepcopy(state)
+        p[flag].compMakeMove(a[0], a[1], s)
+        print(a,"\n", s.getBoardState(),"\n",p[flag].getAvailibleValues(),"\n", p[flag].getAvailableSpaces())
+
+        flag = 1
+        #v = min(v,m=0)
+        del p,s
     return
 
-def utility(player):
-    if player.getIsMax():
+def utility(state, flag):
+    if flag == 0:
         return 100
     else:
         return -100
 
-#def miniMax(board.getBoardState()):
-
-
-# def maxValue(board, players):
-#     if board.isTerminalState():
-#         return utility(player)
-#     v = -float(math.inf)
-#     for action in generateMoves(players[0])
-#         v = max(v,min)
-
-def generateMoves(players):
+def generateMoves(state, flag, players):
     moves = []
-    for player in players:
-        for value in player.getAvailibleValues():
-            for space in player.getAvailableSpaces():
+    for value in players[flag].getAvailibleValues():
+        for space in players[flag].getAvailableSpaces():
                 moves.append([value, space])
     return moves
-
-def getOddMoves(player):
-    return generateMoves(player)
 
 board = Board.Board()
 maxS = True
@@ -42,9 +47,14 @@ maxS2 = False
 player2 = Player.Player(maxS2)
 player1.setAvailableSpaces(board)
 player2.setAvailableSpaces(board)
-print(generateMoves(player1))
-print("\n",generateMoves(player2))
-players = [player1, player2]
+# print(generateMoves(player1))
+# print("\n",generateMoves(player2))
+players = [copy.deepcopy(player1), copy.deepcopy(player2)]
+state = copy.deepcopy(board)
+flag = 0
+d = 3
+minValue(state, d, flag, players)
+#print(generateMoves(state, flag, players))
 # turn = 0
 # previousTurn = 1
 # while board.isTerminalState() != True:

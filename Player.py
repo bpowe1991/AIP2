@@ -1,5 +1,6 @@
 import Board
 import os
+import copy
 
 class Player:
     def __init__(self, maxStatus):
@@ -8,6 +9,7 @@ class Player:
         self.__availableSpaces = []
         self.__currentState = []
         self.__setAvailableValues()
+        self.__usedValues = []
 
     def getIsMax(self):
         return self.__isMax
@@ -20,6 +22,12 @@ class Player:
 
     def setState(self, board):
         self.__currentState = board.getBoardState()
+
+    def resetState(self):
+        self.__currentState = [0,0,0,0,
+                               0,0,0,0,
+                               0,0,0,0,
+                               0,0,0,0]
 
     def __setAvailableValues(self):
         if self.__isMax == True:
@@ -54,14 +62,25 @@ class Player:
                              else:
                                 board.setValue(value, index)
                                 self.setState(board)
-                                self.setAvailableSpaces
-                                self.__availableValues.remove(value)
+                                self.setAvailableSpaces(board)
+                                self.__usedValues.append(self.__availableValues.pop(index))
                          except ValueError:
                             print("\nError! Please only enter an integer for value and index.")   
             
             except ValueError:
                 print("\nError! Please only enter an integer for value and index.")
 
+    def getUsedValues(self):
+        return self.__usedValues
+
+    def compMakeMove(self, value, index, board):
+        print("Before: ", self.__availableValues, "\n", self.__availableSpaces)
+        board.setValue(value, index)
+        self.setState(board)
+        self.setAvailableSpaces(board)
+        self.__usedValues.append(self.__availableValues.pop(index))
+        print("After: ", self.__availableValues, "\n", self.__availableSpaces)
+        
 # board = Board.Board()
 # maxS = True
 # player1 = Player(maxS)
