@@ -181,7 +181,7 @@ players = [copy.deepcopy(player1), copy.deepcopy(player2)]
 state = copy.deepcopy(board)
 flag = 0
 d = 4
-##iterativeDeepeningMiniMax(state,players)
+print(iterativeDeepeningMiniMax(state,players))
 
 
 #print(utility(board, flag))
