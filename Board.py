@@ -18,6 +18,7 @@ class Board:
                                 [3,7,11,15],
                                 [0,5,10,15],
                                 [3,6,9,12]]
+                                
     
     def getBoardState(self):
         return self.__gameBoard
@@ -102,3 +103,9 @@ class Board:
             return self.__winSpaceValues[index]
         else:
             return "N/A"
+
+    def getSums(self):
+        return self.__currentSums
+
+    def getWinSpaceValues(self):
+        return self.__winSpaceValues
