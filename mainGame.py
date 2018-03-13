@@ -11,63 +11,126 @@ def iterativeDeepeningMiniMax(state, players):
         #actions = minValue(state, depth, flag, players)
         #print(actions)
 
-def minValue(state, depth, flag, players):
 
-    actions = generateMoves(state, flag, players)
+def minValue(state, players):
+    print("::Welcome to MIN::")
+    flag = 0
+    actions = generateMoves(state, players, flag)
+    print("Availible Moves:",actions)
+    b = 0
 
     for a in actions:
-        actions = generateMoves(state, flag, players)
-        p = copy.deepcopy(players)
         s = copy.deepcopy(state)
-        print("Actions: ", actions)
+        p = copy.deepcopy(players)
+        print("Current Move:",a)
+        print("Current Board:",s.getBoardState())
+        print("Available Spaces(Odd):",p[flag].getAvailableSpaces())
+        print("Available Spaces(Even):",p[1].getAvailableSpaces())
+        print("Odd Player Values:",p[0].getAvailibleValues())
+        print("Even Player Values:",p[1].getAvailibleValues())
+        print("Current Flag(0=odd,1=even):",flag)
+        p[flag].compMakeMove(a[0], a[1], s)
+        p[1].setAvailableSpaces(s)
+        print("Board After Move:",s.getBoardState())
+        print("Available Spaces(Odd):",p[flag].getAvailableSpaces())
+        print("Available Spaces(Even):",p[1].getAvailableSpaces())
+        print("Odd Player Values:",p[0].getAvailibleValues())
+        print("Even Player Values:",p[1].getAvailibleValues())
+        print("Current Flag(0=odd,1=even):",flag,"\n\n\n")
         
-        print("Board: ", s.getBoardState())
-        print("Odd Player Values: ",p[0].getAvailibleValues())
-        print("Even Player Values: ",p[1].getAvailibleValues())
-        print(a)
-        p[flag].compMakeMove(a[0], a[1], s)
-        p[flag+1].setAvailableSpaces(s)
-        print(a,"\n", s.getBoardState(),"\n",p[flag].getAvailibleValues(),"\n", p[flag].getAvailableSpaces())
-        flag = 1
-        print("Spaces Left: ", p[flag].getAvailableSpaces(),"\n")
         if s.isTerminalState():
-            print("True")
-            print(s.printWinningSpace(), "\n\n")
-            flag = 0
-            del p,s
-
+            print(s.printWinningSpace())
             continue
-        maxValue(s, depth, flag, p)
-        print("Hello, I am MIN", flag)
-        print(s.getBoardState(),"\nCurrent Move:",a)
+        maxValue(s,p)
 
-
-def maxValue(state, depth, flag, players):
-    print("Hello, I am MAX", flag)
-    actions = generateMoves(state, flag, players)
+def maxValue(state, players):
+    print("::Welcome to MAX::")
+    flag = 1
+    actions = generateMoves(state, players, flag)
+    print("Availible Moves:",actions)
+    b = 0
 
     for a in actions:
-        actions = generateMoves(state, flag, players)
-        p = copy.deepcopy(players)
         s = copy.deepcopy(state)
-        print("Board: ", s.getBoardState())
-        print("Odd Player Values: ",p[0].getAvailibleValues())
-        print("Even Player Values: ",p[1].getAvailibleValues())
-        print(a)
+        p = copy.deepcopy(players)
+        print("Current Move:",a)
+        print("Current Board:",s.getBoardState())
+        print("Available Spaces(Odd):",p[flag].getAvailableSpaces())
+        print("Available Spaces(Even):",p[1].getAvailableSpaces())
+        print("Odd Player Values:",p[0].getAvailibleValues())
+        print("Even Player Values:",p[1].getAvailibleValues())
+        print("Current Flag(0=odd,1=even):",flag)
         p[flag].compMakeMove(a[0], a[1], s)
-        p[flag-1].setAvailableSpaces(s)
-        print(a,"\n", s.getBoardState(),"\n",p[flag].getAvailibleValues(),"\n", p[flag].getAvailableSpaces())
-        flag = 0
-        print("Spaces Left: ", p[flag].getAvailableSpaces(),"\n\n")
+        p[0].setAvailableSpaces(s)
+        print("Board After Move:",s.getBoardState())
+        print("Available Spaces(Odd):",p[flag].getAvailableSpaces())
+        print("Available Spaces(Even):",p[1].getAvailableSpaces())
+        print("Odd Player Values:",p[0].getAvailibleValues())
+        print("Even Player Values:",p[1].getAvailibleValues())
+        print("Current Flag(0=odd,1=even):",flag,"\n\n\n")
+
         if s.isTerminalState():
-            print("True")
-            print(s.printWinningSpace(), "\n\n")
-            del p,s
-            flag = 1
+            print(s.printWinningSpace())
+            del s,p
             continue
-        minValue(s, depth, flag, p)
-        print("Hello, I am MAX", flag)
-        print(s.getBoardState(),"\nCurrent Move:",a)
+        minValue(s,p)
+# def minValue(state, depth, flag, players):
+
+#     actions = generateMoves(state, flag, players)
+
+#     for a in actions:
+#         actions = generateMoves(state, flag, players)
+#         p = copy.deepcopy(players)
+#         s = copy.deepcopy(state)
+#         print("Actions: ", actions)
+        
+#         print("Board: ", s.getBoardState())
+#         print("Odd Player Values: ",p[0].getAvailibleValues())
+#         print("Even Player Values: ",p[1].getAvailibleValues())
+#         print(a)
+#         p[flag].compMakeMove(a[0], a[1], s)
+#         p[flag+1].setAvailableSpaces(s)
+#         print(a,"\n", s.getBoardState(),"\n",p[flag].getAvailibleValues(),"\n", p[flag].getAvailableSpaces())
+#         flag = 1
+#         print("Spaces Left: ", p[flag].getAvailableSpaces(),"\n")
+#         if s.isTerminalState():
+#             print("True")
+#             print(s.printWinningSpace(), "\n\n")
+#             flag = 0
+#             del p,s
+
+#             continue
+#         maxValue(s, depth, flag, p)
+#         print("Hello, I am MIN", flag)
+#         print(s.getBoardState(),"\nCurrent Move:",a)
+
+
+# def maxValue(state, depth, flag, players):
+#     print("Hello, I am MAX", flag)
+#     actions = generateMoves(state, flag, players)
+
+#     for a in actions:
+#         actions = generateMoves(state, flag, players)
+#         p = copy.deepcopy(players)
+#         s = copy.deepcopy(state)
+#         print("Board: ", s.getBoardState())
+#         print("Odd Player Values: ",p[0].getAvailibleValues())
+#         print("Even Player Values: ",p[1].getAvailibleValues())
+#         print(a)
+#         p[flag].compMakeMove(a[0], a[1], s)
+#         p[flag-1].setAvailableSpaces(s)
+#         print(a,"\n", s.getBoardState(),"\n",p[flag].getAvailibleValues(),"\n", p[flag].getAvailableSpaces())
+#         flag = 0
+#         print("Spaces Left: ", p[flag].getAvailableSpaces(),"\n\n")
+#         if s.isTerminalState():
+#             print("True")
+#             print(s.printWinningSpace(), "\n\n")
+#             del p,s
+#             flag = 1
+#             continue
+#         minValue(s, depth, flag, p)
+#         print("Hello, I am MAX", flag)
+#         print(s.getBoardState(),"\nCurrent Move:",a)
 
 
 def utility(state, flag):
@@ -76,7 +139,7 @@ def utility(state, flag):
     else:
         return -100
 
-def generateMoves(state, flag, players):
+def generateMoves(state, players, flag):
     moves = []
     for value in players[flag].getAvailibleValues():
         for space in players[flag].getAvailableSpaces():
@@ -95,8 +158,9 @@ player2.setAvailableSpaces(board)
 players = [copy.deepcopy(player1), copy.deepcopy(player2)]
 state = copy.deepcopy(board)
 flag = 0
-d = 3
-minValue(state, d, flag, players)
+d = 4
+minValue(state, players)
+#minValue(state, d, flag, players)
 #print(generateMoves(state, flag, players))
 # turn = 0
 # previousTurn = 1

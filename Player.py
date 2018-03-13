@@ -74,12 +74,10 @@ class Player:
         return self.__usedValues
 
     def compMakeMove(self, value, index, board):
-        print("Before: ", self.__availableValues, "\n", self.__availableSpaces, "index: ", index, "Length: ", len(self.__availableValues))
         board.setValue(value, index)
         self.setState(board)
         self.setAvailableSpaces(board)
         self.__usedValues.append(self.__availableValues.pop(self.__availableValues.index(value)))
-        print("After: ", self.__availableValues, "\n", self.__availableSpaces, "index: ", index, "Length: ", len(self.__availableValues))
 
     def compAddMoveBack(self):
         return 

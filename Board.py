@@ -97,5 +97,8 @@ class Board:
         return moves
 
     def printWinningSpace(self):
-        index = self.__currentSums.index(self.__endSUM)
-        return self.__winSpaceValues[index]
+        if self.__currentSums.__contains__(self.__endSUM):
+            index = self.__currentSums.index(self.__endSUM)
+            return self.__winSpaceValues[index]
+        else:
+            return "N/A"
