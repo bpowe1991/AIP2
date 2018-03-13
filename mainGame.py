@@ -102,9 +102,7 @@ def maxValue(state, players, depth):
 def utility(state, flag):
     score = 0
     state.setValue(15,15)
-    print(state.getSums())
     if state.getSums().__contains__(34):
-        print("True")
         if flag == 0:
             score += 100
         else:
