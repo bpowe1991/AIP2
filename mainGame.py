@@ -17,7 +17,6 @@ def minValue(state, players):
     flag = 0
     actions = generateMoves(state, players, flag)
     print("Availible Moves:",actions)
-    b = 0
 
     for a in actions:
         s = copy.deepcopy(state)
@@ -37,18 +36,22 @@ def minValue(state, players):
         print("Odd Player Values:",p[0].getAvailibleValues())
         print("Even Player Values:",p[1].getAvailibleValues())
         print("Current Flag(0=odd,1=even):",flag,"\n\n\n")
-        
+        answer = None
+
         if s.isTerminalState():
             print(s.printWinningSpace())
+            while answer is None:
+                answer = input("To continue enter any key:\n")
             continue
         maxValue(s,p)
+        while answer is None:
+                answer = input("To continue enter any key:\n")
 
 def maxValue(state, players):
     print("::Welcome to MAX::")
     flag = 1
     actions = generateMoves(state, players, flag)
     print("Availible Moves:",actions)
-    b = 0
 
     for a in actions:
         s = copy.deepcopy(state)
@@ -68,11 +71,17 @@ def maxValue(state, players):
         print("Odd Player Values:",p[0].getAvailibleValues())
         print("Even Player Values:",p[1].getAvailibleValues())
         print("Current Flag(0=odd,1=even):",flag,"\n\n\n")
+        answer = None
 
         if s.isTerminalState():
             print(s.printWinningSpace())
             del s,p
+            
+            while answer is None:
+                answer = input("To continue enter any key:\n")
             continue
+        while answer is None:
+                answer = input("To continue enter any key:\n")    
         minValue(s,p)
 # def minValue(state, depth, flag, players):
 
