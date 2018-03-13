@@ -6,83 +6,88 @@ import os
 import copy
 
 def iterativeDeepeningMiniMax(state, players):
-    for depth in range(1,17):
-        flag = 1
-        #actions = minValue(state, depth, flag, players)
-        #print(actions)
+    for d in range(1, 2):
+        minValue(state, players, d)
 
 
-def minValue(state, players):
-    print("::Welcome to MIN::")
+def minValue(state, players, depth):
+    # print("::Welcome to MIN::")
+    print("Depth:",depth)
+    if depth == 0 or state.isTerminalState():
+        print(state.printWinningSpace())
+        #del s,p
+        return
     flag = 0
     actions = generateMoves(state, players, flag)
-    print("Availible Moves:",actions)
+    # print("Availible Moves:",actions)
 
     for a in actions:
+        print("Availible Moves:",actions)
         s = copy.deepcopy(state)
         p = copy.deepcopy(players)
         print("Current Move:",a)
         print("Current Board:",s.getBoardState())
-        print("Available Spaces(Odd):",p[flag].getAvailableSpaces())
-        print("Available Spaces(Even):",p[1].getAvailableSpaces())
-        print("Odd Player Values:",p[0].getAvailibleValues())
-        print("Even Player Values:",p[1].getAvailibleValues())
-        print("Current Flag(0=odd,1=even):",flag)
+        # print("Available Spaces(Odd):",p[flag].getAvailableSpaces())
+        # print("Available Spaces(Even):",p[1].getAvailableSpaces())
+        # print("Odd Player Values:",p[0].getAvailibleValues())
+        # print("Even Player Values:",p[1].getAvailibleValues())
+        # print("Current Flag(0=odd,1=even):",flag)
         p[flag].compMakeMove(a[0], a[1], s)
         p[1].setAvailableSpaces(s)
-        print("Board After Move:",s.getBoardState())
-        print("Available Spaces(Odd):",p[flag].getAvailableSpaces())
-        print("Available Spaces(Even):",p[1].getAvailableSpaces())
-        print("Odd Player Values:",p[0].getAvailibleValues())
-        print("Even Player Values:",p[1].getAvailibleValues())
-        print("Current Flag(0=odd,1=even):",flag,"\n\n\n")
-        answer = None
+        print("Board After Move:",s.getBoardState(),"\n\n")
+        # print("Available Spaces(Odd):",p[flag].getAvailableSpaces())
+        # print("Available Spaces(Even):",p[1].getAvailableSpaces())
+        # print("Odd Player Values:",p[0].getAvailibleValues())
+        # print("Even Player Values:",p[1].getAvailibleValues())
+        # print("Current Flag(0=odd,1=even):",flag,"\n\n\n")
+        # answer = None
 
-        if s.isTerminalState():
-            print(s.printWinningSpace())
-            while answer is None:
-                answer = input("To continue enter any key:\n")
-            continue
-        maxValue(s,p)
-        while answer is None:
-                answer = input("To continue enter any key:\n")
+        maxValue(s,p, depth-1)
+        # while answer is None:
+        #         answer = input("To continue enter any key:\n")
 
-def maxValue(state, players):
-    print("::Welcome to MAX::")
+def maxValue(state, players, depth):
+    # print("::Welcome to MAX::")
+    print("Depth:",depth)
+    if depth == 0 or state.isTerminalState():
+        print(state.printWinningSpace())
+        #del s,p
+        return
     flag = 1
     actions = generateMoves(state, players, flag)
-    print("Availible Moves:",actions)
+    
 
     for a in actions:
+        print("Availible Moves:",actions)
         s = copy.deepcopy(state)
         p = copy.deepcopy(players)
         print("Current Move:",a)
         print("Current Board:",s.getBoardState())
-        print("Available Spaces(Odd):",p[flag].getAvailableSpaces())
-        print("Available Spaces(Even):",p[1].getAvailableSpaces())
-        print("Odd Player Values:",p[0].getAvailibleValues())
-        print("Even Player Values:",p[1].getAvailibleValues())
-        print("Current Flag(0=odd,1=even):",flag)
+        # print("Available Spaces(Odd):",p[flag].getAvailableSpaces())
+        # print("Available Spaces(Even):",p[1].getAvailableSpaces())
+        # print("Odd Player Values:",p[0].getAvailibleValues())
+        # print("Even Player Values:",p[1].getAvailibleValues())
+        # print("Current Flag(0=odd,1=even):",flag)
         p[flag].compMakeMove(a[0], a[1], s)
         p[0].setAvailableSpaces(s)
-        print("Board After Move:",s.getBoardState())
-        print("Available Spaces(Odd):",p[flag].getAvailableSpaces())
-        print("Available Spaces(Even):",p[1].getAvailableSpaces())
-        print("Odd Player Values:",p[0].getAvailibleValues())
-        print("Even Player Values:",p[1].getAvailibleValues())
-        print("Current Flag(0=odd,1=even):",flag,"\n\n\n")
-        answer = None
+        print("Board After Move:",s.getBoardState(),"\n\n")
+        # print("Available Spaces(Odd):",p[flag].getAvailableSpaces())
+        # print("Available Spaces(Even):",p[1].getAvailableSpaces())
+        # print("Odd Player Values:",p[0].getAvailibleValues())
+        # print("Even Player Values:",p[1].getAvailibleValues())
+        # print("Current Flag(0=odd,1=even):",flag,"\n\n\n")
+        # answer = None
 
         if s.isTerminalState():
             print(s.printWinningSpace())
             del s,p
             
-            while answer is None:
-                answer = input("To continue enter any key:\n")
+            # while answer is None:
+            #     answer = input("To continue enter any key:\n")
             continue
-        while answer is None:
-                answer = input("To continue enter any key:\n")    
-        minValue(s,p)
+        # while answer is None:
+        #         answer = input("To continue enter any key:\n")    
+        minValue(s,p, depth-1)
 # def minValue(state, depth, flag, players):
 
 #     actions = generateMoves(state, flag, players)
@@ -144,9 +149,9 @@ def maxValue(state, players):
 
 def utility(state, flag):
     if flag == 0:
-        return 100
-    else:
         return -100
+    else:
+        return 100
 
 def generateMoves(state, players, flag):
     moves = []
@@ -168,7 +173,7 @@ players = [copy.deepcopy(player1), copy.deepcopy(player2)]
 state = copy.deepcopy(board)
 flag = 0
 d = 4
-minValue(state, players)
+iterativeDeepeningMiniMax(state,players)
 #minValue(state, d, flag, players)
 #print(generateMoves(state, flag, players))
 # turn = 0
