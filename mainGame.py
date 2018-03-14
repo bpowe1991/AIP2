@@ -259,7 +259,7 @@ def humanVsPlayer(currentOrder):
             previousTurn = 1
             os.system('cls' if os.name == 'nt' else 'clear')
         else:
-            #human player
+            #computer player
             print(comLabel, "making move....")
             board.printBoard()
             print(comLabel, "Values:", comp.getAvailibleValues())
