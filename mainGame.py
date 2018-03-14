@@ -36,7 +36,7 @@ def iterativeDeepeningMiniMax(state, players):
             p[0].setAvailableSpaces(s)
             minValueList.append(minValue(s, p, d))
             del s, p
-    print(minValueList)
+
     maxValueInList = max(minValueList)
     bestMoves = []
     for index in range(len(minValueList)):
@@ -234,7 +234,7 @@ def humanVsPlayer(currentOrder):
         player = Player.Player(True)
         comp = Player.Player(False)
         currentPlayer = 1
-        players = [comp, player]
+        players = [player, comp]
         humanLabel = "Player 1"
         comLabel = "Player 2"
     else:
@@ -244,7 +244,7 @@ def humanVsPlayer(currentOrder):
         players = [player, comp]
         humanLabel = "Player 2"
         comLabel = "Player 1"
-    
+
     #Start of game
     while board.isTerminalState() == False:
         if currentPlayer == 1:
@@ -304,17 +304,16 @@ while choice == "Y":
                 print("\n\n Please choose a game mode\n\n")
                 print("+=======================* MENU *=======================+")
                 print("\n\t1. PLAYER VS. COMPUTER\n\t2. COMPUTER VS. COMPUTER\n\n")
-                #mode = input("Enter 1 or 2: ")
-                gameMode = 1#int(mode)
+                mode = input("Enter 1 or 2: ")
+                gameMode = int(mode)
                 if (gameMode != 1):
                     if(gameMode != 2):
                         os.system('cls' if os.name == 'nt' else 'clear')
                         print("\nInvalid Option! Please only enter 1 or 2.Hi\n")
                         gameMode = None
                     
-            except ValueError as e:
+            except ValueError:
                 os.system('cls' if os.name == 'nt' else 'clear')
-                print(e)
                 print(gameMode)
                 print("\nInvalid Option! Please Enter 1 or 2Ho\n")
         
@@ -324,14 +323,14 @@ while choice == "Y":
             order = None
             while order is None:
                 try:
-                    order = 2#int(input("\nDo you want to go 1st(odd = 1) or 2nd(even = 2)?: "))
-                    if order != 1 or order != 2:
-                        os.system('cls' if os.name == 'nt' else 'clear')
-                        print("\nInvalid Option! 1 for 1st(odd) or 2 for 2nd(even).\n")
-                        order = None
-                except ValueError as q:
+                    order = int(input("\nDo you want to go 1st(odd = 1) or 2nd(even = 2)?: "))
+                    if order != 1:
+                        if order != 2:
+                            os.system('cls' if os.name == 'nt' else 'clear')
+                            print("\nInvalid Option! 1 for 1st(odd) or 2 for 2nd(even).\n")
+                            order = None
+                except ValueError:
                     os.system('cls' if os.name == 'nt' else 'clear')
-                    print(q)
                     print("\nInvalid Option! 1 for 1st(odd) or 2 for 2nd(even)WHY.\n")
                     order = None
                 humanVsPlayer(order)
