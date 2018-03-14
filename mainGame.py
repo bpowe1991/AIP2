@@ -288,7 +288,7 @@ def humanVsPlayer(currentOrder):
     else:
         print("Tie Game!")
 
-    del player, comp, board
+    del player, comp, board, players
 
 
 #Start of program with menu
