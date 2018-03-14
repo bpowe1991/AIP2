@@ -1,7 +1,18 @@
+""""
+Programmer: Briton A. Powe          Program Homework Assignment #2
+Date: 3/13/18                       Class: Introduction to A.I.
+Version: 1.0.2
+File: Player Class
+------------------------------------------------------------------------
+Program Description:
+This is the player class required for the main program
+***This program uses Python 3.6.4***
+"""
 import Board
 import os
 import copy
 
+#class designating all players
 class Player:
     def __init__(self, maxStatus):
         self.__availableValues = []
@@ -11,12 +22,15 @@ class Player:
         self.__setAvailableValues()
         self.__usedValues = []
 
+    #determine if max
     def getIsMax(self):
         return self.__isMax
 
+    #update the available spaces
     def setAvailableSpaces(self, board):
         self.__availableSpaces = board.availableMoves()
 
+    #return available spaces
     def getAvailableSpaces(self):
         return self.__availableSpaces
 
@@ -29,6 +43,7 @@ class Player:
                                0,0,0,0,
                                0,0,0,0]
 
+    #set players numbers based on whether max
     def __setAvailableValues(self):
         if self.__isMax == True:
             self.__availableValues = [1,3,5,7,9,11,13,15]
@@ -38,6 +53,7 @@ class Player:
     def getAvailibleValues(self):
         return self.__availableValues
 
+    #Function for human move
     def makeMove(self, board):
         value = index = None
         #Input validation for value and index
@@ -73,6 +89,7 @@ class Player:
     def getUsedValues(self):
         return self.__usedValues
 
+    #Function for computer move
     def compMakeMove(self, value, index, board):
         board.setValue(value, index)
         self.setState(board)
